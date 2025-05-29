@@ -34,6 +34,125 @@
         .destination-btn { width: 100%; margin-bottom: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 12px; border-radius: 8px; transition: all 0.3s ease; }
         .destination-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(5px); color: white; }
         .destination-btn.active { background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); border-color: #667eea; }
+
+        /* --- START: Mobile Responsive Styles --- */
+        @media (max-width: 768px) {
+            .navigation-hud {
+                width: 90%; /* أعرض قليلاً ليناسب الشاشة */
+                padding: 10px; /* تقليل الحشوة الداخلية */
+                top: 10px; /* تقريب من الأعلى قليلاً */
+            }
+            .speed-indicator {
+                font-size: 2rem; /* تصغير حجم خط السرعة */
+                margin-bottom: 5px;
+            }
+            .distance-info {
+                font-size: 0.9rem; /* تصغير حجم خط المسافة */
+                margin: 8px 0;
+            }
+            .eta-info {
+                padding: 8px; /* تقليل الحشوة */
+                font-size: 0.9rem; /* تصغير حجم الخط الأساسي */
+            }
+            .eta-info span { /* استهداف النص داخل ETA */
+                font-size: 0.9rem;
+            }
+
+            .controls-panel {
+                width: 200px; /* تصغير عرض لوحة التحكم */
+                right: 10px; /* تقريب من الحافة اليمنى */
+                top: 10px; /* محاذاة مع أعلى لوحة الملاحة */
+                padding: 10px; /* تقليل الحشوة */
+                z-index: 1001; /* لضمان ظهوره فوق العناصر الأخرى إذا لزم الأمر */
+            }
+            .controls-panel h6 {
+                font-size: 1rem; /* تصغير عنوان لوحة التحكم */
+                margin-bottom: 10px;
+            }
+            /* الأزرار داخل لوحة التحكم تستخدم w-100، وهو جيد للتكديس العمودي */
+            .btn-modern, .btn-success-modern, .btn-danger-modern { /* تعديل عام للأزرار على الموبايل */
+                padding: 8px 12px; /* تقليل حشوة الأزرار */
+                font-size: 0.85rem; /* تصغير خط الأزرار */
+            }
+            .form-check-label {
+                font-size: 0.85rem; /* تصغير خط مفتاح التبديل */
+            }
+
+            .location-panel {
+                width: 220px; /* تصغير عرض لوحة الموقع */
+                left: 10px; /* تقريب من الحافة اليسرى */
+                bottom: 10px; /* تقريب من الأسفل */
+                padding: 10px; /* تقليل الحشوة */
+            }
+            .location-panel h6 {
+                font-size: 1rem; /* تصغير عنوان لوحة الموقع */
+                margin-bottom: 10px;
+            }
+            .info-item {
+                margin: 5px 0; /* تقليل المسافات بين عناصر المعلومات */
+                padding: 3px 0;
+            }
+            .info-label, .info-value { /* استهداف نصوص المعلومات */
+                font-size: 0.85rem;
+            }
+            .compass {
+                width: 45px; /* تصغير حجم البوصلة قليلاً */
+                height: 45px;
+                margin-top: 8px;
+            }
+            .compass::before {
+                font-size: 1.3rem; /* تصغير سهم البوصلة */
+            }
+        }
+
+        /* تعديلات إضافية للشاشات الصغيرة جداً (مثل عرض هاتف صغير) */
+        @media (max-width: 500px) {
+            .speed-indicator {
+                font-size: 1.8rem;
+            }
+            .distance-info {
+                font-size: 0.8rem;
+                flex-direction: column; /* جعل عنوان المسافة وقيمتها تحت بعض */
+                align-items: center; /* توسيطهما */
+            }
+            .distance-info span:first-child { /* المسافة بين عنوان المسافة وقيمتها */
+                margin-bottom: 3px;
+            }
+            .eta-info, .eta-info span {
+                font-size: 0.8rem;
+            }
+
+            .controls-panel {
+                width: 150px; /* تصغير إضافي للوحة التحكم */
+                padding: 8px;
+            }
+            .controls-panel h6 {
+                font-size: 0.9rem;
+            }
+            .btn-modern, .btn-success-modern, .btn-danger-modern {
+                padding: 6px 10px; /* تقليل إضافي لحشوة الأزرار */
+                font-size: 0.75rem; /* تصغير إضافي لخط الأزرار */
+            }
+
+            .location-panel {
+                width: 180px; /* تصغير إضافي للوحة الموقع */
+                padding: 8px;
+            }
+            .location-panel h6 {
+                font-size: 0.9rem;
+            }
+            .info-label, .info-value {
+                font-size: 0.75rem;
+            }
+            .compass {
+                width: 35px; /* تصغير إضافي للبوصلة */
+                height: 35px;
+            }
+            .compass::before {
+                font-size: 1rem; /* تصغير إضافي لسهم البوصلة */
+            }
+        }
+        /* --- END: Mobile Responsive Styles --- */
     </style>
 </head>
 <body>
@@ -80,8 +199,8 @@
         mapboxgl.accessToken = 'pk.eyJ1IjoibW9oYW1tZWQtMTMzMSIsImEiOiJjbHY3dHFsaDcwZWcyMm9xaXBmdHVibm11In0.BDSWP06iKFsCOxq0IwxLBg';
         const map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/navigation-night-v1', // *** MODIFIED: Navigation style ***
-            center: [35.2137, 31.7683], // Ramallah coordinates
+            style: 'mapbox://styles/mapbox/navigation-night-v1',
+            center: [35.2137, 31.7683],
             zoom: 13
         });
 
@@ -164,7 +283,7 @@
             if (typeof heading === 'number' && !isNaN(heading)) {
                 compass.style.transform = `rotate(${heading}deg)`;
             } else {
-                if (window.DeviceOrientationEvent && !window.deviceOrientationListenerAttached) { // Prevent adding multiple listeners
+                if (window.DeviceOrientationEvent && !window.deviceOrientationListenerAttached) {
                     window.addEventListener('deviceorientation', handleOrientation, true);
                     window.deviceOrientationListenerAttached = true; 
                 }
@@ -179,31 +298,24 @@
                 userMarker.setLngLat([longitude, latitude]);
             }
             
-            // *** MODIFIED: Auto-center map in navigation style if enabled ***
             if (autoCenterCheckbox.checked) {
                 const cameraOptions = {
                     center: [longitude, latitude],
-                    zoom: 16, // زوم أقرب مناسب للملاحة
+                    zoom: 16, 
                     essential: true 
                 };
-
-                // إضافة اتجاه الخريطة (bearing) إذا كان اتجاه الحركة (heading) متوفراً
                 if (typeof heading === 'number' && !isNaN(heading)) {
                     cameraOptions.bearing = heading;
                 }
-
-                // إضافة ميلان الخريطة (pitch) ل منظور ثلاثي الأبعاد
-                cameraOptions.pitch = 50; // (0-60 درجة), 50 درجة تعطي رؤية جيدة
-
+                cameraOptions.pitch = 50; 
                 map.flyTo(cameraOptions);
             }
             
             userLocation = { lat: latitude, lng: longitude };
         }
-        window.deviceOrientationListenerAttached = false; // Flag to track listener
+        window.deviceOrientationListenerAttached = false;
 
         function handleOrientation(event) {
-            // التأكد أن هذا التحديث يتم فقط إذا لم يكن لدينا heading من الـ GPS
             if (navigator.geolocation && typeof (navigator.geolocation.getCurrentPosition(p => p.coords.heading)) !== 'number') {
                  if (event.alpha !== null) {
                     compass.style.transform = `rotate(${-event.alpha}deg)`;
@@ -332,10 +444,9 @@
                     center: [userLocation.lng, userLocation.lat],
                     zoom: 15
                 };
-                // إذا كان التوسيط التلقائي مفعلاً، استخدم نفس إعدادات الكاميرا للملاحة
                 if (autoCenterCheckbox.checked) {
                     const currentHeading = userMarker && userMarker.getElement().style.transform.includes('rotate') ?
-                                           parseFloat(userMarker.getElement().style.transform.replace(/[^\d.-]/g, '')) : null; // محاولة قراءة الاتجاه الحالي للمؤشر
+                                           parseFloat(userMarker.getElement().style.transform.replace(/[^\d.-]/g, '')) : null;
                     if (currentHeading !== null && !isNaN(currentHeading)) {
                         options.bearing = currentHeading;
                     }
